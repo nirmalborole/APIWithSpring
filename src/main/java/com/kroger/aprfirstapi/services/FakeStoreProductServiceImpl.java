@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Calendar;
 import java.util.List;
-@Service
+@Service("fakeProduct")
 public class FakeStoreProductServiceImpl implements ProductService{
     private RestTemplate restTemplate;
     @Autowired
@@ -25,7 +25,7 @@ public class FakeStoreProductServiceImpl implements ProductService{
         product.setPrice(dto.getPrice());
         Category category=new Category();
         category.setName(dto.getCategory());
-        product.setCategory(category);
+//        product.setCategory(category);
         return product;
     }
     @Override
@@ -39,5 +39,25 @@ public class FakeStoreProductServiceImpl implements ProductService{
     @Override
     public List<Product> getAllProducts() {
         return List.of();
+    }
+
+    @Override
+    public Product createProuct(String title, String description, String image, double price, String categoryName) {
+        return null;
+    }
+
+    @Override
+    public boolean deleteProuct() {
+        return false;
+    }
+
+    @Override
+    public Product updatePrice(long productId, double updatedprice) {
+        return null;
+    }
+
+    @Override
+    public Product updateImage(long productId, String updateImage) {
+        return null;
     }
 }

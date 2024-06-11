@@ -1,12 +1,11 @@
 package com.kroger.aprfirstapi.controller;
 
+import com.kroger.aprfirstapi.dtos.CreateProductRequestDto;
 import com.kroger.aprfirstapi.models.Product;
 import com.kroger.aprfirstapi.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.List;
 public class ProductController {
     private ProductService productService;
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(@Qualifier("selfProduct") ProductService productService) {
         this.productService = productService;
     }
 
@@ -27,5 +26,10 @@ public class ProductController {
     }
     public List<Product> getProducts(){
         return new ArrayList<Product>();
+    }
+
+    @PostMapping("")
+    public Product createProduct(@RequestBody CreateProductRequestDto requestDto){
+        return productService.createProuct(requestDto.getTitle(),requestDto.getDescription(),requestDto.getImage(),requestDto.getPrice(),requestDto.getCategoryname());
     }
 }
